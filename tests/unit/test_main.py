@@ -9,7 +9,7 @@ def test_parse(mocker, place_id, address, google, postal):
     response = parse(address)
 
     assert isinstance(response, CombinedAddress)
-    assert isinstance(response.place_id, str)
+    assert response.place_id is None
     assert isinstance(response.raw_input, str)
     assert isinstance(response.address_info, DefaultAddressModel)
-    assert isinstance(response.coordinates, Coordinates)
+    assert response.coordinates is None

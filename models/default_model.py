@@ -69,5 +69,5 @@ class Coordinates(BaseModel):
 class CombinedAddress(BaseModel):
     address_info: DefaultAddressModel
     raw_input: str
-    coordinates: Coordinates
-    place_id: str
+    coordinates: Optional[Coordinates]
+    place_id: Optional[str]

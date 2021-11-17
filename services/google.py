@@ -14,7 +14,9 @@ class GoogleHandler:
 
     def parse_address(self) -> Dict[str, str]:
         if existing_address := mongo_services.check_mongo_for_address(self.address):
-            url: str = f"{self.base_maps_url}?placeid={existing_address}&key={self.api_key}"
+            # do we need to return existing address or pick up place_id and call google with it
+            # url: str = f"{self.base_maps_url}?placeid={existing_address}&key={self.api_key}"
+            return self.standardize_google_response(existing_address)
         else:
             url: str = f"{self.base_geocode_url}?address={self.address}key={self.api_key}"
         response: Dict = self._call(url=url)
