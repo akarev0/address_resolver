@@ -1,4 +1,4 @@
-from pydantic import BaseModel, validator
+from pydantic import BaseModel, validator, Field
 from typing import Optional
 
 
@@ -59,3 +59,15 @@ class DefaultAddressModel(BaseModel):
     @validator("postcode", always=True)
     def toUpperCase(cls, value) -> str:
         return value.upper()
+
+
+class Coordinates(BaseModel):
+    latitude: float = Field(alias="lat")
+    longitude: float = Field(alias="lng")
+
+
+class CombinedAddress(BaseModel):
+    address_info: DefaultAddressModel
+    raw_input: str
+    coordinates: Coordinates
+    place_id: str
